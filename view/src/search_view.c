@@ -174,11 +174,136 @@ void scan_choice2_update(char* cpf, char* nome, char* idade, char* data_registro
 
 
 void choice2_update_ok() {
-    printf("\n\n\n-------------------- ATUALIZAÇÃO FEITA COM SUCESSO --------------------\n\n\n");
+    printf("\n\n\n-------------------- ATUALIZACAO FEITA COM SUCESSO --------------------\n\n\n");
 }
 
+
 void choice2_update_fail() {
-    printf("\n\n\n-------------------- ERRO INESPERADO NA ATUALIZAÇÃO --------------------\n\n\n");
+    printf("\n\n\n-------------------- ERRO INESPERADO NA ATUALIZACAO --------------------\n\n\n");
 }
+
+
+void choice3_update_ok() {
+    printf("\n\n\n-------------------- REMOCAO FEITA COM SUCESSO --------------------\n\n\n");
+}
+
+
+void choice3_update_fail() {
+    printf("\n\n\n-------------------- ERRO INESPERADO NA REMOCAO --------------------\n\n\n");
+}
+
+
+void scan_choice4(char* cpf, char* nome, char* idade, char* data_registro) {
+    char garb;
+    int i, ok;
+
+
+    printf("Para inserir um novo registro, digite os valores para os campos CPF, Nome, Idade e Data_Cadstro:\n");
+    printf("\t- CPF: ");
+    scanf("%14[^\n]", cpf);
+
+    // Limpando o stdin
+    garb = getchar();
+    while((garb != '\n') && (garb != EOF)) {
+        garb = getchar();
+    }
+
+    printf("\t- Nome: ");
+    scanf("%1000[^\n]", nome);
+
+    // Limpando o stdin
+    garb = getchar();
+    while((garb != '\n') && (garb != EOF)) {
+        garb = getchar();
+    }
+
+    while(1) {
+        printf("\t- Idade: ");
+        scanf("%3[^\n]", idade);
+
+        // Limpando o stdin
+        garb = getchar();
+        while((garb != '\n') && (garb != EOF)) {
+            garb = getchar();
+        }
+
+        ok = 1;
+        for(i = 0; i < strlen(idade); i++) {
+            if((idade[i] < '0') || (idade[i] > '9')) {
+                ok = 0;
+                break;
+            }
+        }
+
+        if(ok)
+            break;
+
+        printf("Digite uma idade valida!\n");
+    }
+
+    printf("\t- Data de Registro: ");
+    scanf("%10[^\n]", data_registro);
+
+    // Limpando o stdin
+    garb = getchar();
+    while((garb != '\n') && (garb != EOF)) {
+        garb = getchar();
+    }
+}
+
+
+int scan_choice3() {
+    int choice;
+    char garb;
+
+    printf("O que deseja fazer?\n\t(1) - Consultar por CPF;\n\t(2) - Consultar por Nome;\n\t(3) - Remover Paciente por ID;\n\t(-1) - Voltar para o menu inicial;\nDIGITE A SUA ESCOLHA: ");
+    scanf("%d", &choice);
+    garb = getchar();
+    while((garb != '\n') && (garb != EOF)) {
+        garb = getchar();
+    }
+
+
+    if(choice == -1) {
+        return -1;
+    }    
+
+    if (choice <= 0) {
+        printf("A ESCOLHA DEVE SER UM NUMERO POSITIVO!\n\n--------------------------------------------------\n\n");
+        return scan_choice1();
+    }
+
+    if (choice > 3) {
+        printf("A ESCOLHA DEVE SER MENOR OU IGUAL A 3!\n\n--------------------------------------------------\n\n");
+        return scan_choice1();
+    }
+
+    return choice;
+}
+
+
+int choice3_remove() {
+    char garb, o;
+    printf("\n TEM CERTEZA QUE DESEJA EXCLUIR O REGISTRO ABAIXO? ESSA ACAO E IRREVERSIVEL (S/N)\n");
+
+    scanf(" %c", &o);
+    garb = getchar();
+    while((garb != '\n') && (garb != EOF)) {
+        garb = getchar();
+    }
+
+    if((o == 's') || (o == 'S'))
+        return 1;
+    return 0;
+}
+
+int choice4_ok() {
+    printf("\n\n\n-------------------- PACIENTE INSERIDO --------------------\n\n\n");
+}
+
+int choice4_fail() {
+    printf("\n\n\n-------------------- ERRO INESPERADO NA INSERCAO DO PACIENTE --------------------\n\n\n");
+}
+
 
 #endif  // Fim da diretiva de inclusão condicional

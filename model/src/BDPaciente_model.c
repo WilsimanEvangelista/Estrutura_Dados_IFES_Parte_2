@@ -259,7 +259,7 @@ Records* list_records(BDPaciente* connection, uint page) {
 
 
 Records* list_records_by_nome(BDPaciente* connection, char* nome) {
-    Records* array = (Records*) malloc((connection->n_records + 1) * sizeof(Records));
+    Records* array = (Records*) malloc((connection->n_records + 2) * sizeof(Records));
     if(array == NULL)
         return NULL;
 
@@ -315,7 +315,7 @@ Records* list_records_by_nome(BDPaciente* connection, char* nome) {
 
 
 Records* list_records_by_cpf(BDPaciente* connection, char* cpf) {
-    Records* array = (Records*) malloc((connection->n_records + 1) * sizeof(Records));
+    Records* array = (Records*) malloc((connection->n_records + 2) * sizeof(Records));
     if(array == NULL)
         return NULL;
 

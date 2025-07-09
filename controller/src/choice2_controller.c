@@ -68,35 +68,32 @@ void choice2_controller(char* db_filename) {
                 scan_choice2_update(cpf, nome, idade, data);
 
                 if(strcmp(cpf, "-") != 0) {
-                    //printf("\n\nAQUI 1\n\n");
                     cpf_free(records[i].paciente->cpf);
+
                     if(cpf[3] != '.') {
-                        for(j = 3; j < strlen(cpf); j++) {
-                            cpf[j + 1] = cpf[j];
+                        cpf[strlen(cpf) + 1] = '\0';
+                        for(j = strlen(cpf); j > 3; j--) {
+                            cpf[j] = cpf[j - 1];
                         }
                         cpf[3] = '.';
-                        cpf[j + 1] = '\0';
                     }
-                    //xxx.xxx.xxx-xx
-                    //printf("\n\nAQUI 2\n\n");
+
                     if(cpf[7] != '.') {
-                        for(j = 7; j < strlen(cpf); j++) {
-                            cpf[j + 1] = cpf[j];
+                        cpf[strlen(cpf) + 1] = '\0';
+                        for(j = strlen(cpf); j > 7; j--) {
+                            cpf[j] = cpf[j - 1];
                         }
                         cpf[7] = '.';
-                        cpf[j + 1] = '\0';
                     }
 
-                    //printf("\n\nAQUI 3\n\n");
                     if(cpf[11] != '-') {
-                        for(j = 11; j < strlen(cpf); j++) {
-                            cpf[j + 1] = cpf[j];
+                        cpf[strlen(cpf) + 1] = '\0';
+                        for(j = strlen(cpf); j > 11; j--) {
+                            cpf[j] = cpf[j - 1];
                         }
                         cpf[11] = '-';
-                        cpf[j + 1] = '\0';
                     }
 
-                    //printf("\n\nAQUI 4\n\n");
                     records[i].paciente->cpf = cpf_init(cpf);
                 }
                 free(cpf);
